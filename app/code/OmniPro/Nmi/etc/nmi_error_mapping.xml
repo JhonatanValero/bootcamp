@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+        <message code="300" translate="true">Información de Pago Incorrecta, Por favor vuelva a intentarlo</message>
+    </message_list>
+</mapping>

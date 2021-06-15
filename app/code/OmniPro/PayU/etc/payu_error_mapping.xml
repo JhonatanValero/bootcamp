@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+        <message code="ERROR" translate="true">Ocurrió un error general.</message>
+        <message code="APPROVED" translate="true">La transacción fue aprobada.</message>
+        <message code="ANTIFRAUD_REJECTED" translate="true">La transacción fue rechazada por el sistema anti-fraude.</message>
+        <message code="BANK_FRAUD_REJECTED" translate="true">La transacción fue rechazada debido a sospecha de fraude en la entidad financiera.</message>
+        <message code="PAYMENT_NETWORK_REJECTED" translate="true">La red financiera rechazó la transacción.</message>
+        <message code="ENTITY_DECLINED" translate="true">La transacción fue declinada por el banco o por la red financiera debido a un error.</message>
+        <message code="INTERNAL_PAYMENT_PROVIDER_ERROR" translate="true">Ocurrió un error en el sistema intentando procesar el pago.</message>
+        <message code="INACTIVE_PAYMENT_PROVIDER" translate="true">El proveedor de pagos no se encontraba activo.</message>
+        <message code="DIGITAL_CERTIFICATE_NOT_FOUND" translate="true">La red financiera reportó un error en la autenticación.</message>
+        <message code="INVALID_EXPIRATION_DATE_OR_" translate="true">El código de seguridad o la fecha de expiración estaba inválido.</message>
+        <message code="SECURITY_CODE" translate="true"></message>
+        <message code="INVALID_RESPONSE_PARTIAL_APPROVAL" translate="true">Tipo de respuesta no válida. La entidad aprobó parcialmente la transacción y debe ser cancelada automáticamente por el sistema.</message>
+        <message code="INSUFFICIENT_FUNDS" translate="true">La cuenta no tenía fondos suficientes.</message>
+        <message code="CREDIT_CARD_NOT_AUTHORIZED" translate="true">La tarjeta de crédito no estaba autorizada para transacciones por Internet.</message>
+        <message code="_FOR_INTERNET_TRANSACTIONS" translate="true"></message>
+        <message code="INVALID_TRANSACTION" translate="true">La red financiera reportó que la transacción fue inválida.</message>
+        <message code="INVALID_CARD" translate="true">La tarjeta es inválida.</message>
+        <message code="EXPIRED_CARD" translate="true">La tarjeta ya expiró.</message>
+        <message code="RESTRICTED_CARD" translate="true">La tarjeta presenta una restricción.</message>
+        <message code="CONTACT_THE_ENTITY" translate="true">Debe contactar al banco.</message>
+        <message code="REPEAT_TRANSACTION" translate="true">Se debe repetir la transacción.</message>
+        <message code="ENTITY_MESSAGING_ERROR" translate="true">La red financiera reportó un error de comunicaciones con el banco.</message>
+        <message code="BANK_UNREACHABLE" translate="true">El banco no se encontraba disponible.</message>
+        <message code="EXCEEDED_AMOUNT" translate="true">La transacción excede un monto establecido por el banco.</message>
+        <message code="NOT_ACCEPTED_TRANSACTION" translate="true">La transacción no fue aceptada por el banco por algún motivo.</message>
+        <message code="ERROR_CONVERTING_TRANSACTION_AMOUNTS" translate="true">Ocurrió un error convirtiendo los montos a la moneda de pago.</message>
+        <message code="EXPIRED_TRANSACTION" translate="true">La transacción expiró.</message>
+        <message code="PENDING_TRANSACTION_REVIEW" translate="true">La transacción fue detenida y debe ser revisada, esto puede ocurrir por filtros de seguridad.</message>
+        <message code="PENDING_TRANSACTION_CONFIRMATION" translate="true">La transacción está pendiente de ser confirmada.</message>
+        <message code="PENDING_TRANSACTION_TRANSMISSION" translate="true">La transacción está pendiente para ser trasmitida a la red financiera. Normalmente esto aplica para transacciones con medios de pago en efectivo.</message>
+        <message code="PAYMENT_NETWORK_BAD_RESPONSE" translate="true">El mensaje retornado por la red financiera es inconsistente.</message>
+        <message code="PAYMENT_NETWORK_NO_CONNECTION" translate="true">No se pudo realizar la conexión con la red financiera.</message>
+        <message code="PAYMENT_NETWORK_NO_RESPONSE" translate="true">La red financiera no respondió.</message>
+        <message code="FIX_NOT_REQUIRED" translate="true">Clínica de transacciones: Código de manejo interno.</message>
+    </message_list>
+</mapping>

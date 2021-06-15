@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <simplepayment>
+                <active>1</active>
+                <title>Simple Payment Method</title>
+                <security_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <order_status>pending_payment</order_status>
+                <model>OmniPro\SimplePaymentMethod\Model\SimplePaymentMethod</model>
+                <payment_action>authorize</payment_action>
+                <cctypes>VI,MC</cctypes>
+                <allowspecific>1</allowspecific>
+                <specificcountry>CO,BR</specificcountry>
+                <debug>1</debug>
+                <nmi_gateway>https://secure.nmi.com/api/transact.php</nmi_gateway>
+            </simplepayment>
+        </payment>
+    </default>
+</config>

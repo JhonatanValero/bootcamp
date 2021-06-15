@@ -1,0 +1,103 @@
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+    .customer-account-login {
+        * {
+            font-family: 'Dosis', sans-serif;
+        }
+
+        .menu {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+    
+        .menu .boton-menu {
+            border: 0;
+            padding: 0;
+            margin: 16px 10px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            background-color: #393FD0;
+        }
+    
+        .menu .boton-menu .boton-menu-icono {
+            width: 30px;
+            margin: 4.5px 0;
+        }
+    
+        .menu-lista {
+            width: 96%;
+            margin-top: 267px;
+            position: absolute;
+            background-color: #393FD0;
+
+            .menu-lista-item {
+                margin-bottom: 39px;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 23px;
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+
+                p {
+                    width: 28px;
+                    height: 2px;
+                    margin-top: 11.5px;
+                    background-color: #393FD0;
+                }
+
+                a {
+                    color: #FFFFFF;
+                    opacity: 0.5;
+                    margin-left: 24px;
+                }               
+            }
+        }
+    }
+    
+    .catalog-product-view {
+
+        .header.content {
+            height: 40px;
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: auto 40px 40px 40px 40px;
+            grid-template-rows: 40px;
+    
+            .nav-toggle {
+                position: initial;
+                grid-area: ~"1/5";
+            }
+    
+            .nav-toggle::before {
+                width: 20px;
+                margin-left: 20%;
+            }
+    
+            .logo {
+                grid-area: ~"1/1";
+                margin: auto 0 auto 21px;
+            }
+    
+            .minicart-wrapper {
+                grid-area: ~"1/4";
+                margin: auto
+            }
+    
+            .block-search {
+                margin: auto;
+    
+                .label {
+                    width: 24px;
+                }
+    
+                .control {
+                    border: 0;
+                }
+            }
+        }
+    }
+}

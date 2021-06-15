@@ -1,0 +1,89 @@
+<div class="menu">
+    <button class="boton-menu" id="botonatras-menu" onclick="hideMenu()">
+        <img class="boton-menu-icono" src='<?php echo $this->getViewFileUrl('images/ic_back.svg'); ?>'>
+    </button>
+    <button class="boton-menu" id="boton-menu" onclick="hideMenu()">
+        <img class="boton-menu-icono" src='<?php echo $this->getViewFileUrl('images/line.svg'); ?>'>
+        <img class="boton-menu-icono" src='<?php echo $this->getViewFileUrl('images/line.svg'); ?>'>
+    </button>
+    <div id="menu-lista" class="menu-lista">
+        <div class="menu-lista-item">
+            <p></p>
+            <a href="">Inicio</a>
+        </div>
+        <div class="menu-lista-item">
+            <p></p>
+            <a href="">Servicios</a>
+        </div>
+        <div class="menu-lista-item">
+            <p></p>
+            <a href="">Nuestro Equipo</a>
+        </div>
+        <div class="menu-lista-item">
+            <p></p>
+            <a href="">Portafolio</a>
+        </div>
+        <div class="menu-lista-item">
+        <p></p>
+            <a href="">Contacto</a>
+        </div>
+        <div class="menu-lista-item">
+            <p></p>
+            <a href="">Términos y condiciones</a>
+        </div>
+    </div>
+</div>
+
+<div class="icono">
+    <img class="icono-img" src='<?php echo $this->getViewFileUrl('images/icon.svg'); ?>'>
+</div>
+<div class="container" id="container-form">
+    <div class="formulario">
+        <div class="formulario-cabezera">
+            <div class="ingreso-cabecera tab-label-rigth" id="ingreso-cabecera">
+                <button class="ingreso-cabecera-boton" id="boton-ingreso" onclick="hideFormRegistro()">Ingreso</button>
+            </div>
+            <div class="registro-cabecera tab-label-left" id="registro-cabecera">
+                <button class="registro-cabecera-boton" id="boton-registro" onclick="hideFormIngreso()">Registro</button>
+            </div>
+        </div>
+        <div class="formulario-contenedor">
+            <form class="formulario-ingreso" id="formulario-ingreso" action="">
+                <label class="formulario-ingreso-email-label" for="email">Email</label>
+                <input class="formulario-ingreso-email" type="text" name="emailLogin" id="email" placeholder="example@example.com">
+                <label class="formulario-ingreso-password-label" for="password">Contraseña</label>
+                <input class="formulario-ingreso-password" type="password" name="passwordLogin" id="password" placeholder="*********">
+                <div class="newsletter-toggle-switch">
+                    <div class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </div>
+                    <div class="newsletter-text">Suscribirse al Newsletter</div>
+                </div>
+                <button class="boton-submit boton-form-ingreso" type="submit">Ingreso</button>
+                <a class="link-recuperar-password" onclick="location.href='https://app.magento-community.test/my_store_view/catalog/product/view/id/68/s/chaz-kangeroo-hoodie/category/12/'">Olvide la contraseña</a>
+            </form>
+            <form class="formulario-registro" id="formulario-registro" action="">
+                <label class="formulario-registro-nombre-label" for="nombre-usuario">Nombre</label>
+                <input class="formulario-registro-nombre" type="text" name="nombreUsuario" id="nombre-usuario" placeholder="Pepe">
+                <label class="formulario-registro-apellido-label" for="apellido-usuario">Apellido</label>
+                <input class="formulario-registro-apellido" type="text" name="apellidoUsuario" id="apellido-usuario" placeholder="Perez">
+                <label class="formulario-registro-email-label" for="email">Email</label>
+                <input class="formulario-registro-email" type="text" name="emailLogin" id="email" placeholder="example@example.com">
+                <label class="formulario-registro-password-label" for="password">Contraseña</label>
+                <input class="formulario-registro-password" type="password" name="passwordLogin" id="password" placeholder="********">
+                <button class="boton-submit boton-form-registro" onclick="hideCheckRegistro()">Registro</button>
+            </form>
+            <div class="check-registro" id="check-registro">
+                <div class="check-texto">Succes</div>
+                <div class="container-icono">
+                    <img src='<?php echo $this->getViewFileUrl('images/path_21.svg'); ?>' alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    hideMenu();
+    hideFormRegistro();
+</script>

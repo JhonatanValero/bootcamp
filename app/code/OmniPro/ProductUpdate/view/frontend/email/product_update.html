@@ -1,0 +1,29 @@
+{{template config_path="design/email/header_template"}}
+<table>
+    <tr>
+        <td>
+            {{trans "Hola, te saluda OMNIPRO" templateVar=$templateVar}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{trans "La actualizacion de productos por CSV fue realizada" templateVar=$templateVar}}
+        </td>
+    <tr>
+        <td>
+            {{trans "Errores: %errors" errors=$errors}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{trans "Productos Creados: %createdProduct" createdProduct=$createdProduct}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{trans "Productos Actualizados: %updatedProduct" updatedProduct=$updatedProduct}}
+        </td>
+    </tr>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

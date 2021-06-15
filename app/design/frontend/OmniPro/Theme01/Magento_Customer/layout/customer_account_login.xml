@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link rel="stylesheet" type="text/css" src="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700" src_type="url" />
+        <link src="js/script.js"/>
+    </head>
+    <body>
+        <referenceContainer name="header.container" remove="true"/>
+        <referenceBlock name="catalog.topnav" remove="true"/>
+        <referenceContainer name="footer-container" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+        <referenceBlock name="customer.new"  remove="true"/>
+        <referenceBlock name="page.main.title" remove="true"/>
+    </body>
+</page>

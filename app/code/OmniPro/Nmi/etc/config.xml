@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <nmi>
+                <active>1</active>
+                <title>Tarjeta de Crédito</title>
+                <security_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <order_status>pending_payment</order_status>
+                <model>NmiGatewayFacade</model>
+                <payment_action>authorize</payment_action>
+                <cctypes>VI,MC</cctypes>
+                <allowspecific>1</allowspecific>
+                <specificcountry>CO,BR</specificcountry>
+                <can_authorize>1</can_authorize>
+                <can_sale>1</can_sale>
+                <can_capture>1</can_capture>
+                <can_void>1</can_void>
+                <is_gateway>1</is_gateway>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>1</can_use_internal>
+                <debugReplaceKeys>security_key,ccnumber,ccexp,cvv</debugReplaceKeys>
+                <debug>1</debug>
+                <nmi_gateway>https://secure.nmi.com/api/transact.php</nmi_gateway>
+            </nmi>
+        </payment>
+    </default>
+</config>

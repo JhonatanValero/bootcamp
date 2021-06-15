@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="NmiGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\OmniPro\Nmi\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info\Cc</argument>
+            <argument name="valueHandlerPool" xsi:type="object">NmiGatewayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">NmiGatewayCommandPool</argument>
+        </arguments>        
+    </virtualType>
+    <!-- Value Handler Pool -->
+    <virtualType name="NmiGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">NmiGatewayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Config Value Handler -->
+    <virtualType name="NmiGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">NmiGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+    <!-- NMI Config -->
+    <virtualType name="NmiGatewayConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\OmniPro\Nmi\Model\Ui\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- NMI Logger -->
+    <virtualType name="OmniPro\Nmi\Model\Method\NmiDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/nmi-payment.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OmniPro\Nmi\Model\Method\NmiLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">OmniPro\Nmi\Model\Method\NmiDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="NmiGatewayLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">OmniPro\Nmi\Model\Method\NmiLogger</argument>
+            <argument name="config" xsi:type="object">NmiGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+    
+    <!-- Command Pool -->
+    <virtualType name="NmiGatewayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">NmiGatewayAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">NmiGatewayCaptureCommand</item>
+                <item name="sale" xsi:type="string">NmiGatewaySaleCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize Command -->
+    <virtualType name="NmiGatewayAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">NmiGatewayAuthorizationRequest</argument>
+            <argument name="transferFactory" xsi:type="object">OmniPro\Nmi\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">NmiGatewayHttpClient</argument>
+            <argument name="validator" xsi:type="object">OmniPro\Nmi\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="handler" xsi:type="object">NmiGatewayAuthorizationHandler</argument>
+            <argument name="errorMessageMapper" xsi:type="object">NmiGatewayErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Command -->
+    <virtualType name="NmiGatewayCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">OmniPro\Nmi\Gateway\Request\CaptureTransactionBuilder</argument>
+            <argument name="transferFactory" xsi:type="object">OmniPro\Nmi\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">NmiGatewayHttpClient</argument>
+            <argument name="validator" xsi:type="object">OmniPro\Nmi\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="handler" xsi:type="object">OmniPro\Nmi\Gateway\Response\CaptureHandler</argument>
+            <argument name="errorMessageMapper" xsi:type="object">NmiGatewayErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Sale Command -->
+    <virtualType name="NmiGatewaySaleCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">NmiGatewaySaleRequest</argument>
+            <argument name="transferFactory" xsi:type="object">OmniPro\Nmi\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">NmiGatewayHttpClient</argument>
+            <argument name="validator" xsi:type="object">OmniPro\Nmi\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="handler" xsi:type="object">NmiGatewayAuthorizationHandler</argument>
+            <argument name="errorMessageMapper" xsi:type="object">NmiGatewayErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="NmiGatewayAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="cc" xsi:type="string">OmniPro\Nmi\Gateway\Request\CreditCardBuilder</item>
+                <item name="address" xsi:type="string">OmniPro\Nmi\Gateway\Request\AddressBuilder</item>
+                <item name="transaction" xsi:type="string">OmniPro\Nmi\Gateway\Request\AuthorizeTransactionBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Sale Request -->
+    <virtualType name="NmiGatewaySaleRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="cc" xsi:type="string">OmniPro\Nmi\Gateway\Request\CreditCardBuilder</item>
+                <item name="address" xsi:type="string">OmniPro\Nmi\Gateway\Request\AddressBuilder</item>
+                <item name="transaction" xsi:type="string">OmniPro\Nmi\Gateway\Request\SaleTransactionBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="OmniPro\Nmi\Gateway\Request\AuthorizeTransactionBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">NmiGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\Nmi\Gateway\Request\CaptureTransactionBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">NmiGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\Nmi\Gateway\Request\SaleTransactionBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">NmiGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- NMI Transfer Factory -->
+    <type name="OmniPro\Nmi\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="config" xsi:type="object">NmiGatewayConfig</argument>
+            <argument name="logger" xsi:type="object">NmiGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- NMI HTTP Client -->
+    <virtualType name="NmiGatewayHttpClient" type="OmniPro\Nmi\Gateway\Http\Client\CurlClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">NmiGatewayLogger</argument>
+            <argument name="converter" xsi:type="object">OmniPro\Nmi\Gateway\Http\Converter\QueryParamsToArray</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="OmniPro\Nmi\Gateway\Http\Converter\QueryParamsToArray">
+        <arguments>
+            <argument name="logger" xsi:type="object">NmiGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Nmi Handler Chain -->
+    <virtualType name="NmiGatewayAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="authorize" xsi:type="string">OmniPro\Nmi\Gateway\Response\AuthorizationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Error code Mapper -->
+    <virtualType name="NmiGatewayErrorMessageMapper" type="Magento\Payment\Gateway\ErrorMapper\ErrorMessageMapper">
+        <arguments>
+            <argument name="messageMapping" xsi:type="object">NmiGatewayMappingData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="NmiGatewayMappingData" type="Magento\Payment\Gateway\ErrorMapper\MappingData">
+        <arguments>
+            <argument name="reader" xsi:type="object">NmiVirtualConfigReader</argument>
+            <argument name="cacheId" xsi:type="string">nmi_error_mapper</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="NmiVirtualConfigReader" type="Magento\Payment\Gateway\ErrorMapper\VirtualConfigReader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">nmi_error_mapping.xml</argument>
+        </arguments>
+    </virtualType>
+</config>

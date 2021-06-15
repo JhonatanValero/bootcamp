@@ -1,0 +1,318 @@
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    
+    .customer-account-login {
+
+        * {
+            font-family: 'Dosis', sans-serif;
+        }
+
+        .page-wrapper {
+            height: 812px;
+            background-color: #393FD0;
+            background-image: url('images/fill_13.svg'), url('images/path.svg'), url('images/fill_17.svg');
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: 48px 0, 0 0, 100% 194px;
+        }
+          
+        .icono {
+            margin-top: 59px;
+            display: flex;
+            justify-content: center;
+
+            .icono-img {
+                width: 96px;
+                height: 146px;
+            }
+        }
+
+        .container {
+            height: 100%;
+            margin-top: 72.2px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+    
+        .formulario {
+            width: 90%;
+        }
+    
+        .formulario .formulario-cabezera {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .tab-label-rigth{
+            margin-right: -1.5em;
+            -webkit-clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
+            clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%);  
+        }
+
+        .tab-label-left{
+          margin-left: -.5em;
+          -webkit-clip-path: polygon(10% 0%, 100% 100%, 100% 100%, 0% 100%); 
+          clip-path: polygon(5% 0%, 100% 0%, 100% 100%, 0% 100%);  
+        }
+        
+        .ingreso-cabecera, .registro-cabecera{
+            width: 166px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Dosis;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 25px;
+            text-align: center;
+            text-transform: uppercase;
+    
+            .ingreso-cabecera-boton,
+            .registro-cabecera-boton {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                border: 0;
+                color: white;
+                background-color: #3A3061;
+            }
+        }
+        
+        .ingreso-cabecera .ingreso-cabecera-boton,
+        .registro-cabecera .registro-cabecera-boton
+        {
+            font-family: 'Dosis', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    
+        .registro-cabecera-texto {
+            color: white;
+        }
+    
+        .ingreso-cabecera {
+            height: 60px;
+            margin: 0;
+            opacity: 0.9;
+            background-color: #3A3061;
+            border-radius: 6px 3px 0px 0px;
+        }
+        
+        .registro {
+            width: 327px;
+        }
+    
+        .registro-cabecera {
+            height: 60px;
+            opacity: 0.35;
+            border: 0px;
+            background-color: #3A3061;
+            border-radius: 3px 6px 0px 0px;
+        }
+    
+        .formulario-contenedor {
+            .boton-submit {
+                height: 44px;
+                margin: 0 auto;
+                border-radius: 24px;
+                background-image: linear-gradient(to right, #8DE7ED, #2FCEC5);
+                text-transform: uppercase;
+            }
+
+            .boton-form-ingreso {
+                margin: 22px 24px 17px 24px;
+            }
+
+            .boton-form-registro {
+                margin: 30px 24px 28px 24px;
+            }
+
+        }
+
+        .formulario-ingreso {
+            height: 349px;
+        }
+
+        .formulario-registro {
+            height: 441px;
+        }
+
+        .check-registro {
+            background-color: #37D0C8;
+            height: 441px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .check-texto {
+                margin: 104px 0 22px 0;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                color: #392F63;
+            }
+
+            .container-icono {
+                width: 113px;
+                height: 113px;
+                background-color: #383067;
+                border-radius: 50%;
+
+                img {
+                    margin: 14px 0 0 16px;
+                    transform: rotate(-5deg);
+                }
+            }
+        }
+    
+        .formulario-ingreso, .formulario-registro {
+            opacity: 0.9;
+            background-color: #3A3061;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0px 0px 6px 6px;
+    
+            label {
+                margin-left: 24px;
+                font-size: 14px;
+                line-height: 18px;
+                text-transform: uppercase;
+            }
+
+            .formulario-ingreso-email-label,
+            .formulario-ingreso-password-label,
+            .formulario-registro-nombre-label,
+            .formulario-registro-apellido-label,
+            .formulario-registro-email-label,
+            .formulario-registro-password-label {
+                font-family: Dosis;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            .formulario-ingreso-email-label {
+                margin-top: 23px;
+            }
+
+            .formulario-ingreso-password-label {
+                margin-top: 24px;
+            }
+
+            .formulario-registro-nombre-label {
+                margin-top: 19px;
+            }
+
+            .formulario-registro-apellido-label,
+            .formulario-registro-email-label,
+            .formulario-registro-password-label {
+                margin-top: 24px;
+            }
+
+            .formulario-ingreso-email,
+            .formulario-ingreso-password,
+            .formulario-registro-nombre,
+            .formulario-registro-apellido,
+            .formulario-registro-email,
+            .formulario-registro-password {
+                width: 85%;
+                height: 42px;
+                border-top: 0px;
+                border-right: 0px;
+                border-bottom: 2px solid white;
+                border-left: 0px;
+                margin-left: 24px;
+                background-color: #3A3061;
+                font-family: Dosis;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            .newsletter-toggle-switch {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 15px 0 0 0;
+
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 60px;
+                    height: 34px;
+                }
+                  
+                .switch input { 
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+                  
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+                  
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 26px;
+                    width: 26px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: white;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+                  
+                input:checked + .slider {
+                    background-color: #2FCEC5;
+                }
+                  
+                input:focus + .slider {
+                    box-shadow: 0 0 1px #2FCEC5;
+                }
+                  
+                input:checked + .slider:before {
+                    -webkit-transform: translateX(26px);
+                    -ms-transform: translateX(26px);
+                    transform: translateX(26px);
+                }
+                  
+                  /* Rounded sliders */
+                .slider.round {
+                    border-radius: 34px;
+                }
+                  
+                .slider.round:before {
+                    border-radius: 50%;
+                }
+
+                .newsletter-text {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .link-recuperar-password {
+            text-align: center;
+            color: #EFEFEF;
+        }   
+    }
+}
+

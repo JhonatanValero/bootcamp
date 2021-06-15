@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <payu>
+                <active>1</active>
+                <title>PayU - Tarjeta de Credito</title>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <api_login backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <account_id backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <order_status>pending_payment</order_status>
+                <model>PayUGatewayFacade</model>
+                <payment_action>authorize_capture</payment_action>
+                <cctypes>VI,MC</cctypes>
+                <allowspecific>1</allowspecific>
+                <specificcountry>CO,BR</specificcountry>
+                <can_authorize>1</can_authorize>
+                <can_sale>1</can_sale>
+                <can_capture>1</can_capture>
+                <can_void>1</can_void>
+                <is_gateway>1</is_gateway>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>1</can_use_internal>
+                <debugReplaceKeys>apiKey,apiLogin,number,securityCode,expirationDate</debugReplaceKeys>
+                <debug>1</debug>
+                <payu_gateway>https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi</payu_gateway>
+            </payu>
+        </payment>
+    </default>
+</config>

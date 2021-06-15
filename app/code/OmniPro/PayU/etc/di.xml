@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- PayU Gateway Facade -->
+    <virtualType name="PayUGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\OmniPro\PayU\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info\Cc</argument>
+            <argument name="valueHandlerPool" xsi:type="object">PayUGatewayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">PayUGatewayCommandPool</argument>
+        </arguments>        
+    </virtualType>
+
+    <!-- Value Handler Pool -->
+    <virtualType name="PayUGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">PayUGatewayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Config Value Handler -->
+    <virtualType name="PayUGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Config -->
+    <virtualType name="PayUGatewayConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\OmniPro\PayU\Model\Ui\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger -->
+    <virtualType name="OmniPro\PayU\Model\Method\PayUDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/payu-payment.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OmniPro\PayU\Model\Method\PayULogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">OmniPro\PayU\Model\Method\PayUDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="PayUGatewayLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">OmniPro\PayU\Model\Method\PayULogger</argument>
+            <argument name="config" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+    
+    <!-- Command Pool -->
+    <virtualType name="PayUGatewayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="capture" xsi:type="string">PayUGatewayCaptureCommand</item>
+                <item name="sale" xsi:type="string">PayUGatewaySaleCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Command -->
+    <virtualType name="PayUGatewayCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">PayUGatewaySaleRequest</argument>
+            <argument name="transferFactory" xsi:type="object">OmniPro\PayU\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">PayUGatewayHttpClient</argument>
+            <argument name="validator" xsi:type="object">OmniPro\PayU\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="handler" xsi:type="object">PayUGatewayAuthorizationHandler</argument>
+            <argument name="errorMessageMapper" xsi:type="object">PayUGatewayErrorMesageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Sale Command -->
+    <virtualType name="PayUGatewaySaleCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">PayUGatewaySaleRequest</argument>
+            <argument name="transferFactory" xsi:type="object">OmniPro\PayU\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">PayUGatewayHttpClient</argument>
+            <argument name="validator" xsi:type="object">OmniPro\PayU\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="handler" xsi:type="object">PayUGatewayAuthorizationHandler</argument>
+            <argument name="errorMessageMapper" xsi:type="object">PayUGatewayErrorMesageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Sale Request -->
+    <virtualType name="PayUGatewaySaleRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="main" xsi:type="string">OmniPro\PayU\Gateway\Request\DefaultBuilder</item>
+                <item name="transaction" xsi:type="string">OmniPro\PayU\Gateway\Request\AuthorizeTransactionBuilder</item>
+                <item name="order" xsi:type="string">OmniPro\PayU\Gateway\Request\OrderBuilder</item>
+                <item name="payer" xsi:type="string">OmniPro\PayU\Gateway\Request\PayerBuilder</item>
+                <item name="cc" xsi:type="string">OmniPro\PayU\Gateway\Request\CreditCardBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="OmniPro\PayU\Gateway\Request\AuthorizeTransactionBuilder">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+            <argument name="config" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Request\CreditCardBuilder">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Request\DefaultBuilder">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+            <argument name="config" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Request\OrderBuilder">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+            <argument name="config" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Request\PayerBuilder">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Response\AuthorizationHandler">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Validator\ResponseCodeValidator">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="OmniPro\PayU\Gateway\Http\Converter\QueryParamsToArray">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- PayU Transfer Factory -->
+    <type name="OmniPro\PayU\Gateway\Http\TransferFactory">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+            <argument name="config" xsi:type="object">PayUGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- PayU HTTP Client -->
+    <virtualType name="PayUGatewayHttpClient" type="OmniPro\PayU\Gateway\Http\Client\CurlClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">PayUGatewayLogger</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- PayU Handler Chain -->
+    <virtualType name="PayUGatewayAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="authorize" xsi:type="string">OmniPro\PayU\Gateway\Response\AuthorizationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Error Code Mapper -->
+    <virtualType name="PayUGatewayErrorMesageMapper" type="Magento\Payment\Gateway\ErrorMapper\ErrorMessageMapper">
+        <arguments>
+            <argument name="messageMapping" xsi:type="object">PayUGatewayMappingData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PayUGatewayMappingData" type="Magento\Payment\Gateway\ErrorMapper\MappingData">
+        <arguments>
+            <argument name="reader" xsi:type="object">PayUVirtualConfigReader</argument>
+            <argument name="cacheId" xsi:type="string">payu_error_mapper</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="PayUVirtualConfigReader" type="Magento\Payment\Gateway\ErrorMapper\VirtualConfigReader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">payu_error_mapping.xml</argument>
+        </arguments>
+    </virtualType>
+</config>
