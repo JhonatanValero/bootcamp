@@ -86,7 +86,9 @@ class Product
         // $sourceItem->setSku("24-MB01");
         // $sourceItem->setQuantity(10);
         // $sourceItem->setStatus(0);
-        // $this->sourceItemsSave->execute([$sourceItem]); 
+        // $this->sourceItemsSave->execute([$sourceItem]);
+
+        $test = "cambio";
 
         try {
             $response = ['success' => true, 'message' => $params];
